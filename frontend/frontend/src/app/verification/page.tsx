@@ -5,51 +5,28 @@ export default function VerificationPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-green-600 shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="text-white hover:text-green-100">
-              <ArrowLeftIcon className="h-6 w-6" />
-            </Link>
-            <h1 className="text-2xl font-bold text-white">Tableau de Bord Candidat</h1>
+      <header className="bg-green-600">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <span className="text-white text-xl font-bold">SenParrainage Électoral</span>
+            </div>
+            <div className="flex space-x-4">
+              <Link href="/" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Accueil
+              </Link>
+              <Link href="/candidats" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Candidats
+              </Link>
+              <Link href="/verification" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Vérification
+              </Link>
+            </div>
           </div>
-        </div>
-      </div>
+        </nav>
+      </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Formulaire de connexion */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">Connexion Candidat</h2>
-          <form className="space-y-4">
-            <div>
-              <label htmlFor="candidateId" className="block text-sm font-medium text-gray-700">
-                Numéro d&apos;identification candidat
-              </label>
-              <input
-                type="text"
-                id="candidateId"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-                placeholder="Entrez votre numéro d'identification"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-            >
-              Accéder au tableau de bord
-            </button>
-          </form>
-        </div>
 
         {/* Statistiques */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
