@@ -44,17 +44,26 @@ const candidates = [
 export default function CandidatesPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-green-600 shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center space-x-4">
-            <Link href="/" className="text-white hover:text-green-100">
-              <ArrowLeftIcon className="h-6 w-6" />
-            </Link>
-            <h1 className="text-2xl font-bold text-white">Candidats et Programmes</h1>
+      <header className="bg-green-600">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <span className="text-white text-xl font-bold">SenParrainage Électoral</span>
+            </div>
+            <div className="flex space-x-4">
+              <Link href="/" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Accueil
+              </Link>
+              <Link href="/candidats" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Candidats
+              </Link>
+              <Link href="/verification" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Vérification
+              </Link>
+            </div>
           </div>
-        </div>
-      </div>
+        </nav>
+      </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

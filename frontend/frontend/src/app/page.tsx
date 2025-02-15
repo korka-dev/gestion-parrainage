@@ -21,9 +21,6 @@ export default function Home() {
               <Link href="/verification" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                 Vérification
               </Link>
-              <Link href="#" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                Connexion
-              </Link>
             </div>
           </div>
         </nav>
