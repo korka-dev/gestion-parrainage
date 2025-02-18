@@ -49,20 +49,6 @@ export default function VoterLogin() {
         backgroundPosition: 'center',
       }}
     >
-      {/* <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img
-          src="/images/vote.png"
-          alt="Voter illustration"
-          className="w-32 h-32 mx-auto"
-        />
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-          Espace Électeur
-        </h2>
-        <p className="mt-2 text-center text-sm text-green-100">
-          Enregistrez votre parrainage en ligne
-        </p>
-      </div> */}
-
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10 border border-green-200">
           <div className="bg-green-50 p-4 rounded-md mb-6 text-green-700 border border-green-100">

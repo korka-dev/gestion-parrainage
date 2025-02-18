@@ -1,151 +1,101 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Search, AlertCircle } from 'lucide-react'
+import { useState } from 'react';
 
-interface CandidateInfo {
-  voterNumber: string;
-  firstName: string;
-  lastName: string;
-  birthDate: string;
-}
+export default function ParrainageForm() {
+  const [electorNumber, setElectorNumber] = useState('');
+  const [nationalId, setNationalId] = useState('');
+  const [voterInfo, setVoterInfo] = useState(null);
+  const [error, setError] = useState('');
+  const [authCode, setAuthCode] = useState('');
 
-interface CandidateForm {
-  email: string;
-  phone: string;
-  party: string;
-  slogan: string;
-  photo: File | null;
-  colors: string[];
-  websiteUrl: string;
-}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-export default function CandidatesManagement() {
-  const [voterNumber, setVoterNumber] = useState('')
-  const [error, setError] = useState('')
-  const [candidateInfo, setCandidateInfo] = useState<CandidateInfo | null>(null)
-  const [formData, setFormData] = useState<CandidateForm>({
-    email: '',
-    phone: '',
-    party: '',
-    slogan: '',
-    photo: null,
-    colors: ['#008000', '#006400', '#32CD32'],
-    websiteUrl: ''
-  })
-
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    
-    try {
-      const response = await new Promise<CandidateInfo>((resolve) => 
-        setTimeout(() => resolve({
-          voterNumber,
-          firstName: 'John',
-          lastName: 'Doe',
-          birthDate: '1980-01-01'
-        }), 1000)
-      )
-      
-      setCandidateInfo(response)
-    } catch (error) {
-      setError("Le candidat considéré n'est pas présent dans le fichier électoral")
+    // Simuler une vérification des informations
+    if (electorNumber && nationalId) {
+      // Ici, vous feriez une requête à votre API pour vérifier les informations
+      // Pour l'exemple, nous simulons une réponse réussie
+      setVoterInfo({
+        name: 'Dupont',
+        firstName: 'Jean',
+        birthDate: '01/01/1980',
+        pollingStation: 'Bureau de vote 123'
+      });
+      setError('');
+    } else {
+      setError('Veuillez vérifier les informations saisies.');
     }
-  }
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      alert('Candidature enregistrée avec succès.')
-    } catch (error) {
-      alert('Erreur lors de l\'enregistrement')
-    }
-  }
-
-  const handleColorChange = (index: number, value: string) => {
-    const newColors = [...formData.colors]
-    newColors[index] = value
-    setFormData({ ...formData, colors: newColors })
-  }
+  const handleAuthCodeSubmit = () => {
+    // Traiter la soumission du code d'authentification
+    alert(`Code d'authentification soumis : ${authCode}`);
+  };
 
   return (
-    <div className="min-h-screen bg-green-50 py-12">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-green-700 text-center mb-8">Enregistrement des Candidats</h1>
-
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <form onSubmit={handleSearch} className="mb-6">
-            <div className="mb-4">
-              <label className="block text-lg font-semibold text-green-800 mb-2">
-                Numéro de Carte d'Électeur
-              </label>
-              <div className="relative rounded-md shadow-sm">
-                <input
-                  type="text"
-                  value={voterNumber}
-                  onChange={(e) => setVoterNumber(e.target.value)}
-                  className="w-full px-4 py-2 border border-green-300 rounded-md focus:ring-green-500 focus:border-green-500"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="absolute inset-y-0 right-0 px-4 bg-green-600 text-white rounded-r-md hover:bg-green-700"
-                >
-                  <Search className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-          </form>
-
-          {error && (
-            <div className="mb-4 p-4 bg-red-50 rounded-md flex items-center text-red-700">
-              <AlertCircle className="h-5 w-5 mr-2" />
-              {error}
-            </div>
-          )}
-
-          {candidateInfo && (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="bg-green-100 p-4 rounded-md">
-                <h3 className="font-semibold text-green-800">Informations de l'Électeur</h3>
-                <p className="text-sm text-green-700">Nom: {candidateInfo.lastName}</p>
-                <p className="text-sm text-green-700">Prénom: {candidateInfo.firstName}</p>
-                <p className="text-sm text-green-700">Date de naissance: {candidateInfo.birthDate}</p>
-              </div>
-
-              <div className="space-y-4">
-                <input type="email" placeholder="Email" className="w-full p-2 border rounded-md" required />
-                <input type="tel" placeholder="Téléphone" className="w-full p-2 border rounded-md" required />
-                <input type="text" placeholder="Parti Politique" className="w-full p-2 border rounded-md" />
-                <input type="text" placeholder="Slogan" className="w-full p-2 border rounded-md" required />
-                <input type="file" accept="image/*" className="w-full p-2 border rounded-md" required />
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                {formData.colors.map((color, index) => (
-                  <input
-                    key={index}
-                    type="color"
-                    value={color}
-                    onChange={(e) => handleColorChange(index, e.target.value)}
-                    className="w-full h-10"
-                    required
-                  />
-                ))}
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700"
-              >
-                Enregistrer la Candidature
-              </button>
-            </form>
-          )}
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label htmlFor="electorNumber" className="block text-sm font-medium text-gray-700">Numéro de carte d'électeur</label>
+          <input
+            type="text"
+            id="electorNumber"
+            value={electorNumber}
+            onChange={(e) => setElectorNumber(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            required
+          />
         </div>
-      </div>
+        <div>
+          <label htmlFor="nationalId" className="block text-sm font-medium text-gray-700">Numéro de carte d'identité nationale</label>
+          <input
+            type="text"
+            id="nationalId"
+            value={nationalId}
+            onChange={(e) => setNationalId(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Vérifier les informations
+        </button>
+      </form>
+
+      {error && <p className="mt-4 text-center text-sm text-red-600">{error}</p>}
+
+      {voterInfo && (
+        <div className="mt-6 p-4 bg-green-50 rounded-lg">
+          <h3 className="text-lg font-medium text-green-800">Informations de l'électeur</h3>
+          <div className="mt-2 space-y-2 text-green-700">
+            <p><span className="font-semibold">Nom :</span> {voterInfo.name}</p>
+            <p><span className="font-semibold">Prénom :</span> {voterInfo.firstName}</p>
+            <p><span className="font-semibold">Date de naissance :</span> {voterInfo.birthDate}</p>
+            <p><span className="font-semibold">Bureau de vote :</span> {voterInfo.pollingStation}</p>
+          </div>
+          <div className="mt-4">
+            <label htmlFor="authCode" className="block text-sm font-medium text-gray-700">Code d'authentification</label>
+            <input
+              type="text"
+              id="authCode"
+              value={authCode}
+              onChange={(e) => setAuthCode(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+              required
+            />
+          </div>
+          <button
+            onClick={handleAuthCodeSubmit}
+            className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          >
+            Se Connecter
+          </button>
+        </div>
+      )}
     </div>
-  )
+  );
 }
