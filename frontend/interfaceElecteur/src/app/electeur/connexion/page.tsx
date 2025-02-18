@@ -36,7 +36,7 @@ export default function VoterLogin() {
       router.push('/electeur/contact');
     } else {
       // Affichage d'une erreur en cas d'échec
-      setError('Les informations fournies sont incorrectes');
+      setError('Les informations fournies sont incorrecte');
     }
   };
 
