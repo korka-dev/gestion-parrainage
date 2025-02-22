@@ -43,14 +43,14 @@ const LoginForm = () => {
       return;
     }
 
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Connexion réussie !');
-    } catch (err) {
-      setError('Erreur lors de la connexion. Veuillez réessayer.');
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   await new Promise(resolve => setTimeout(resolve, 1000));
+    //   console.log('Connexion réussie !');
+    // } catch (err) {
+    //   setError('Erreur lors de la connexion. Veuillez réessayer.');
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -98,7 +98,7 @@ const LoginForm = () => {
 
             <div className="space-y-2">
               <label htmlFor="code" className="block text-sm font-medium text-gray-700">
-                Code de parrainage
+                Code d'authentification
               </label>
               <input
                 id="code"
