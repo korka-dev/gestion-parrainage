@@ -98,7 +98,7 @@ const LoginForm = () => {
 
             <div className="space-y-2">
               <label htmlFor="code" className="block text-sm font-medium text-gray-700">
-                Code d'authentification
+                Code d&apos;authentification
               </label>
               <input
                 id="code"

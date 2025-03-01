@@ -29,7 +29,7 @@ export default function VoterLogin() {
     if (
       formData.voterCardNumber === '12345' &&
       formData.nationalId === 'ABC123' &&
-      formData.lastName === 'Doe' &&
+      formData.lastName === 'Abc' &&
       formData.pollingStation === '001'
     ) {
       // Redirection en cas de réussite
