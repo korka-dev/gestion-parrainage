@@ -1,0 +1,38 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Electeur {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  numeroElecteur String   @unique
+  numeroCNI      String   @unique
+  nom            String
+  bureauVote     String
+  telephone      String   @unique
+  email          String   @unique
+  photo          String 
+  code           String  
+}
+
+
+model Candidat {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  numeroElecteur String   @unique
+  numeroCNI      String   @unique
+  telephone      String   @unique
+  email          String   @unique
+  nom            String
+  prenom         String
+  parti          String
+  programme      String[]
+  photoId        String?  @default("")  
+  code           String
+  couleurs       String[]
+}
+
+
