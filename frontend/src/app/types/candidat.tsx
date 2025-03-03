@@ -13,3 +13,8 @@ export interface CandidatData {
     couleurs: string[];
     checkOnly?: boolean;
   }
+
+  export interface CandidatLoginData {
+    email: string;
+    code: string;
+}
