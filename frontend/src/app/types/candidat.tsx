@@ -1,4 +1,3 @@
-// types/candidat.ts
 export interface CandidatData {
     numeroElecteur: string;
     numeroCNI: string;
@@ -13,3 +12,24 @@ export interface CandidatData {
     couleurs: string[];
     checkOnly?: boolean;
   }
+
+ 
+export type CandidatInfo = {
+  id: string;
+  numeroElecteur: string;
+  numeroCNI: string;
+  telephone: string;
+  email: string;
+  nom: string;
+  prenom: string;
+  parti: string;
+  programme: string[];
+  photoId?: string | null;
+  couleurs: string[];
+  code: string;
+};
+
+export interface CandidatLoginData {
+  email: string;
+  code: string;
+}

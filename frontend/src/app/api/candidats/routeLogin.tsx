@@ -4,25 +4,25 @@ import jwt from "jsonwebtoken";
 
 export async function POST(request: Request) {
   try {
-    const { numeroElecteur, otp } = await request.json();
+    const { email, otp } = await request.json();
 
     // Vérifier si l'électeur existe
-    const electeur = await prisma.electeur.findUnique({
-      where: { numeroElecteur },
+    const candidat = await prisma.candidat.findUnique({
+      where: { email },
     });
 
-    if (!electeur) {
-      return NextResponse.json({ error: "Numéro d'électeur ou code OTP incorrect" }, { status: 404 });
+    if (!candidat) {
+      return NextResponse.json({ error: "Email ou code OTP incorrect" }, { status: 404 });
     }
 
     // Vérifier si l'OTP correspond
-    if (electeur.code !== otp) {
-      return NextResponse.json({ error: "Numéro d'électeur ou code OTP incorrect" }, { status: 401 });
+    if (candidat.code !== otp) {
+      return NextResponse.json({ error: "Email ou code OTP incorrect" }, { status: 401 });
     }
 
     // Générer un token JWT (facultatif)
     const token = jwt.sign(
-      { id: electeur.id, numeroElecteur: electeur.numeroElecteur },
+      { id: candidat.id, numeroElecteur: candidat.numeroElecteur },
       process.env.JWT_SECRET as string,
       { expiresIn: "2h" }
     );

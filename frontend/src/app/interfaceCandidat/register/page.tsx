@@ -6,7 +6,20 @@ import { registerCandidat } from '../../api/candidats/register';
 import { useRouter } from 'next/navigation';
 import { sendOTP } from '../../api/sms/sms';
 import Link from 'next/link';
-import { FaPlus } from 'react-icons/fa'; 
+import { FaPlus } from 'react-icons/fa';
+import { 
+  User, 
+  CreditCard, 
+  Users, 
+  Briefcase, 
+  Phone, 
+  Mail, 
+  Lock, 
+  ArrowRight, 
+  ArrowLeft, 
+  Palette, 
+  FileText 
+} from 'lucide-react';
 
 export default function RegisterCandidat() {
   const router = useRouter();
@@ -47,7 +60,6 @@ export default function RegisterCandidat() {
   };
 
   const handleProgrammeChange = (index: number, value: string) => {
-    // Create a copy of the programme array
     const newProgramme = [...formData.programme];
     newProgramme[index] = value;
     setFormData({ ...formData, programme: newProgramme });
@@ -58,7 +70,6 @@ export default function RegisterCandidat() {
   };
 
   const handleCouleurChange = (index: number, value: string) => {
-    // Create a copy of the couleurs array
     const newCouleurs = [...formData.couleurs];
     newCouleurs[index] = value;
     setFormData({ ...formData, couleurs: newCouleurs });
@@ -180,277 +191,428 @@ export default function RegisterCandidat() {
     setErrorCountdown(null);
   };
 
+  const getStepTitle = () => {
+    switch(step) {
+      case 1: return "Informations d'authentification";
+      case 2: return "Informations de contact";
+      case 3: return "Informations supplémentaires";
+      default: return "Inscription Candidat";
+    }
+  };
+
   if (success) {
     return (
-      <div className="max-w-md mx-auto mt-10 p-6 bg-green-100 rounded shadow-md">
-        <h2 className="text-xl font-bold text-green-600 mb-4">Inscription réussie!</h2>
-        <p>Votre compte a été créé avec succès.</p>
-        <button
-          onClick={() => router.push('/')}
-          className="mt-4 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-        >
-          Aller à la connexion
-        </button>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-green-50 to-emerald-600 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-md bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+          <div className="absolute -top-24 -left-24 w-48 h-48 bg-green-300/30 rounded-full blur-2xl"></div>
+          <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-300/30 rounded-full blur-2xl"></div>
+          
+          <div className="relative bg-gradient-to-r from-green-600 to-emerald-500 px-8 py-8">
+            <h2 className="text-3xl font-bold text-white text-center">
+              Inscription réussie
+            </h2>
+            <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-green-400 to-emerald-400"></div>
+          </div>
+          
+          <div className="relative px-8 py-8">
+            <div className="mb-6 bg-green-50 text-green-700 px-4 py-3 rounded-xl border border-green-100 text-sm flex items-center">
+              <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              Votre compte a été créé avec succès.
+            </div>
+            
+            <button
+              onClick={() => router.push('/interfaceCandidat/login')}
+              className="w-full py-4 px-4 rounded-xl text-white font-medium transition duration-200 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-green-200 flex items-center justify-center"
+            >
+              Aller à la connexion
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow-md">
-      <h1 className="text-2xl font-bold text-center mb-6">Système de Candidature Électorale</h1>
-
-      {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-          <p>{error}</p>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-green-50 to-emerald-600 flex items-center justify-center p-4">
+      <div className="relative w-full max-w-md bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+        {/* Éléments décoratifs */}
+        <div className="absolute -top-24 -left-24 w-48 h-48 bg-green-300/30 rounded-full blur-2xl"></div>
+        <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-300/30 rounded-full blur-2xl"></div>
+        
+        {/* En-tête */}
+        <div className="relative bg-gradient-to-r from-green-600 to-emerald-500 px-8 py-8">
+          <h2 className="text-3xl font-bold text-white text-center">
+            Inscription
+          </h2>
+          <p className="text-green-50 text-center mt-2">
+            {getStepTitle()}
+          </p>
+          
+          {/* Indicateur d'étape */}
+          <div className="flex justify-center mt-4 space-x-2">
+            {[1, 2, 3].map((i) => (
+              <div 
+                key={i}
+                className={`w-3 h-3 rounded-full ${
+                  i === step ? 'bg-white' : 'bg-green-200/50'
+                }`}
+              ></div>
+            ))}
+          </div>
+          
+          {/* Élément décoratif */}
+          <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-green-400 to-emerald-400"></div>
         </div>
-      )}
 
-      {step === 1 && (
-        <form onSubmit={handleSubmitAuth}>
-          <h2 className="text-xl font-semibold mb-4">Informations d'authentification</h2>
-
-          <div className="mb-4">
-            <label className="block mb-1">Numéro de carte d'électeur</label>
-            <input
-              type="text"
-              name="numeroElecteur"
-              value={formData.numeroElecteur}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1">Numéro de carte d'identité nationale</label>
-            <input
-              type="text"
-              name="numeroCNI"
-              value={formData.numeroCNI}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1">Nom</label>
-            <input
-              type="text"
-              name="nom"
-              value={formData.nom}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1">Prénom</label>
-            <input
-              type="text"
-              name="prenom"
-              value={formData.prenom}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1">Parti politique</label>
-            <input
-              type="text"
-              name="parti"
-              value={formData.parti}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 mb-4"
-            disabled={isCheckingData}
-          >
-            {isCheckingData ? "Vérification..." : "Continuer"}
-          </button>
-
-          <div className="text-center mt-2">
-            <span className="text-gray-700">Vous avez déjà un profil? </span>
-            <Link href="/interfaceCandidat/login" className="text-green-600 hover:text-green-800">
-              Connectez-vous ici
-            </Link>
-          </div>
-        </form>
-      )}
-
-      {step === 2 && (
-        <form onSubmit={handleSubmitContact}>
-          <h2 className="text-xl font-semibold mb-4">Informations de contact</h2>
-
-          <div className="mb-4">
-            <label className="block mb-1">Numéro de téléphone</label>
-            <input
-              type="tel"
-              name="telephone"
-              value={formData.telephone}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              placeholder="Ex: 771234567"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1">Adresse email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div className="flex space-x-2 mb-4">
-            <button
-              type="button"
-              onClick={() => setStep(1)}
-              className="w-1/3 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400"
-            >
-              Retour
-            </button>
-
-            <button
-              type="submit"
-              className="w-2/3 bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
-              Recevoir code
-            </button>
-          </div>
-
-          <div className="text-center mt-2">
-            <span className="text-gray-700">Vous avez déjà un profil? </span>
-            <Link href="/interfaceCandidat/login" className="text-green-600 hover:text-green-800">
-              Connectez-vous ici
-            </Link>
-          </div>
-        </form>
-      )}
-
-      {step === 3 && (
-        <form onSubmit={handleSubmitFinal}>
-          <h2 className="text-xl font-semibold mb-4">Informations supplémentaires</h2>
-
-          <div className="mb-4">
-            <label className="block mb-1">Programmes du candidat</label>
-            {formData.programme.length > 0 ? (
-              formData.programme.map((programme, index) => (
-                <div key={index} className="mb-2 relative">
+        {/* Contenu du formulaire */}
+        <div className="relative px-8 py-8">
+          {error && (
+            <div className="mb-6 bg-red-50 text-red-700 px-4 py-3 rounded-xl border border-red-100 text-sm flex items-center">
+              <div className="w-2 h-2 bg-red-500 rounded-full mr-2"></div>
+              {error}
+            </div>
+          )}
+          
+          {step === 1 && (
+            <form onSubmit={handleSubmitAuth} className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="numeroElecteur" className="block text-sm font-medium text-gray-700">
+                  Numéro de carte d'électeur
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <CreditCard className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
                   <input
+                    id="numeroElecteur"
+                    name="numeroElecteur"
                     type="text"
-                    value={programme}
-                    onChange={(e) => handleProgrammeChange(index, e.target.value)}
-                    className="w-full p-2 border rounded"
+                    value={formData.numeroElecteur}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
                     required
                   />
-                  {index === formData.programme.length - 1 && (
-                    <FaPlus
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-                      onClick={addProgramme}
-                    />
-                  )}
                 </div>
-              ))
-            ) : (
-              <div className="mb-2">
-                <label className="block mb-1">Aucun programme ajouté</label>
-                <FaPlus
-                  className="text-gray-500 cursor-pointer"
-                  onClick={addProgramme}
-                />
               </div>
-            )}
-          </div>
 
-          <div className="mb-4">
-            <label className="block mb-1">Couleurs du parti</label>
-            {formData.couleurs.length > 0 ? (
-              formData.couleurs.map((couleur, index) => (
-                <div key={index} className="mb-2 relative">
+              <div className="space-y-2">
+                <label htmlFor="numeroCNI" className="block text-sm font-medium text-gray-700">
+                  Numéro de carte d'identité nationale
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <CreditCard className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
                   <input
-                    type="color"
-                    value={couleur}
-                    onChange={(e) => handleCouleurChange(index, e.target.value)}
-                    className="w-full p-2 border rounded"
+                    id="numeroCNI"
+                    name="numeroCNI"
+                    type="text"
+                    value={formData.numeroCNI}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
                     required
                   />
-                  {index === formData.couleurs.length - 1 && formData.couleurs.length < 3 && (
-                    <FaPlus
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-                      onClick={addCouleur}
-                    />
-                  )}
                 </div>
-              ))
-            ) : (
-              <div className="mb-2">
-                <label className="block mb-1">Aucune couleur ajoutée</label>
-                <FaPlus
-                  className="text-gray-500 cursor-pointer"
-                  onClick={addCouleur}
-                />
               </div>
-            )}
-          </div>
 
-          <div className="mb-4 p-3 bg-green-50 text-green-800 rounded">
-            <p>Un code de vérification a été envoyé à votre numéro de téléphone et email.</p>
-            <p className="font-bold">Code de test: {formData.code}</p>
-          </div>
+              <div className="space-y-2">
+                <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
+                  Nom
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
+                  <input
+                    id="nom"
+                    name="nom"
+                    type="text"
+                    value={formData.nom}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
+                    required
+                  />
+                </div>
+              </div>
 
-          <div className="mb-4">
-            <label className="block mb-1">Entrez le code reçu</label>
-            <input
-              type="text"
-              name="verificationCode"
-              className="w-full p-2 border rounded"
-              placeholder="Code à 6 chiffres"
-              disabled
-              value={formData.code}
-            />
-          </div>
+              <div className="space-y-2">
+                <label htmlFor="prenom" className="block text-sm font-medium text-gray-700">
+                  Prénom
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
+                  <input
+                    id="prenom"
+                    name="prenom"
+                    type="text"
+                    value={formData.prenom}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
+                    required
+                  />
+                </div>
+              </div>
 
-          <div className="flex space-x-2 mb-4">
-            <button
-              type="button"
-              onClick={() => setStep(2)}
-              className="w-1/3 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400"
-              disabled={isLoading}
-            >
-              Retour
-            </button>
+              <div className="space-y-2">
+                <label htmlFor="parti" className="block text-sm font-medium text-gray-700">
+                  Parti politique
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Briefcase className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
+                  <input
+                    id="parti"
+                    name="parti"
+                    type="text"
+                    value={formData.parti}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
+                    required
+                  />
+                </div>
+              </div>
 
-            <button
-              type="submit"
-              className="w-2/3 bg-green-600 text-white py-2 rounded hover:bg-green-700"
-              disabled={isLoading}
-            >
-              {isLoading ? "Traitement..." : "Confirmer l'inscription"}
-            </button>
-          </div>
+              <button
+                type="submit"
+                className={`w-full py-4 px-4 rounded-xl text-white font-medium transition duration-200 flex items-center justify-center
+                  ${isCheckingData 
+                    ? 'bg-green-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-green-200'
+                  }`}
+                disabled={isCheckingData}
+              >
+                {isCheckingData ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Vérification...
+                  </span>
+                ) : (
+                  <>
+                    Continuer
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </>
+                )}
+              </button>
 
-          <div className="text-center mt-2">
-            <span className="text-gray-700">Vous avez déjà un profil? </span>
-            <Link href="/interfaceCandidat/login" className="text-green-600 hover:text-green-800">
-              Connectez-vous ici
-            </Link>
-          </div>
-        </form>
-      )}
+              <div className="text-center mt-4 text-sm text-gray-600">
+                <span className="text-gray-700">Vous avez déjà un profil? </span>
+                <Link href="/interfaceCandidat/login" className="text-green-600 hover:text-green-800 font-medium">
+                  Connectez-vous ici
+                </Link>
+              </div>
+            </form>
+          )}
+
+          {step === 2 && (
+            <form onSubmit={handleSubmitContact} className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="telephone" className="block text-sm font-medium text-gray-700">
+                  Numéro de téléphone
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Phone className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
+                  <input
+                    id="telephone"
+                    name="telephone"
+                    type="tel"
+                    value={formData.telephone}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
+                    placeholder="Ex: 771234567"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  Adresse email
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex space-x-2 mt-6">
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="w-1/3 py-4 px-4 rounded-xl font-medium transition duration-200 flex items-center justify-center bg-gray-100 text-gray-700 hover:bg-gray-200"
+                >
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                  Retour
+                </button>
+
+                <button
+                  type="submit"
+                  className="w-2/3 py-4 px-4 rounded-xl text-white font-medium transition duration-200 flex items-center justify-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-green-200"
+                >
+                  Recevoir code
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="text-center mt-4 text-sm text-gray-600">
+                <span className="text-gray-700">Vous avez déjà un profil? </span>
+                <Link href="/interfaceCandidat/login" className="text-green-600 hover:text-green-800 font-medium">
+                  Connectez-vous ici
+                </Link>
+              </div>
+            </form>
+          )}
+
+          {step === 3 && (
+            <form onSubmit={handleSubmitFinal} className="space-y-4">
+              <div className="mb-6 bg-green-50 text-green-800 px-4 py-3 rounded-xl border border-green-100 text-sm">
+                <p>Un code de vérification a été envoyé à votre numéro de téléphone et email.</p>
+                <p className="font-bold mt-1">Code de test: {formData.code}</p>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="verificationCode" className="block text-sm font-medium text-gray-700">
+                  Code de vérification
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Lock className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                  </div>
+                  <input
+                    id="verificationCode"
+                    name="verificationCode"
+                    type="text"
+                    disabled
+                    value={formData.code}
+                    className="block w-full pl-10 pr-3 py-3 text-center tracking-widest border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm text-lg"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="programme" className="block text-sm font-medium text-gray-700">
+                  Programmes du candidat
+                </label>
+                {formData.programme.map((programme, index) => (
+                  <div key={index} className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <FileText className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                    </div>
+                    <input
+                      type="text"
+                      value={programme}
+                      onChange={(e) => handleProgrammeChange(index, e.target.value)}
+                      className="block w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
+                      placeholder="Entrez un programme"
+                      required
+                    />
+                    {index === formData.programme.length - 1 && (
+                      <div 
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-green-500 hover:text-green-700"
+                        onClick={addProgramme}
+                      >
+                        <FaPlus className="h-4 w-4" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="couleurs" className="block text-sm font-medium text-gray-700">
+                  Couleurs du parti (max 3)
+                </label>
+                {formData.couleurs.map((couleur, index) => (
+                  <div key={index} className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Palette className="h-5 w-5 text-gray-400 group-focus-within:text-green-500 transition-colors" />
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="color"
+                        value={couleur}
+                        onChange={(e) => handleCouleurChange(index, e.target.value)}
+                        className="w-10 h-10 rounded-lg ml-10 mr-2 border border-gray-200"
+                      />
+                      <span className="text-gray-600 text-sm">{couleur}</span>
+                    </div>
+                    {index === formData.couleurs.length - 1 && formData.couleurs.length < 3 && (
+                      <div 
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-green-500 hover:text-green-700"
+                        onClick={addCouleur}
+                      >
+                        <FaPlus className="h-4 w-4" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex space-x-2 mt-6">
+                <button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  className="w-1/3 py-4 px-4 rounded-xl font-medium transition duration-200 flex items-center justify-center bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  disabled={isLoading}
+                >
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                  Retour
+                </button>
+
+                <button
+                  type="submit"
+                  className={`w-2/3 py-4 px-4 rounded-xl text-white font-medium transition duration-200 flex items-center justify-center
+                    ${isLoading 
+                      ? 'bg-green-400 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-green-200'
+                    }`}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Traitement...
+                    </span>
+                  ) : (
+                    <>
+                      Confirmer l'inscription
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="text-center mt-4 text-sm text-gray-600">
+                <span className="text-gray-700">Vous avez déjà un profil? </span>
+                <Link href="/interfaceCandidat/login" className="text-green-600 hover:text-green-800 font-medium">
+                  Connectez-vous ici
+                </Link>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

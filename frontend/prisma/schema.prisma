@@ -8,17 +8,18 @@ generator client {
 }
 
 model Electeur {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  numeroElecteur String   @unique
-  numeroCNI      String   @unique
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  numeroElecteur String    @unique
+  numeroCNI      String    @unique
   nom            String
   bureauVote     String
-  telephone      String   @unique
-  email          String   @unique
+  telephone      String    @unique
+  email          String    @unique  
   photo          String 
   code           String  
+  aParraine      Boolean   @default(false)
+   
 }
-
 
 model Candidat {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -35,4 +36,39 @@ model Candidat {
   couleurs       String[]
 }
 
+model Agent {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  nom           String
+  prenom        String
+  email         String     @unique
+  password      String
+  empreinteSHA  String     @unique
+  fichiers      Fichier[]
+  periodes      PeriodeParrainage[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Fichier {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  nom         String
+  chemin      String
+  type        String
+  taille      Int
+  checksum    String    
+  uploadedAt  DateTime  @default(now())
+  agent       Agent     @relation(fields: [agentId], references: [id])
+  agentId     String    @db.ObjectId
+}
+
+model PeriodeParrainage {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  dateDebut     DateTime
+  dateFin       DateTime
+  description   String?
+  active        Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  agent         Agent     @relation(fields: [agentId], references: [id])
+  agentId       String    @db.ObjectId
+}
 

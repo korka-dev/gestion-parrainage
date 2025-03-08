@@ -23,4 +23,10 @@ export type ElecteurInfo = {
 };
 
   
+export interface SponsorData {
+    numeroElecteur: string;
+    numeroCandidat: string;
+}
+  
+
   
