@@ -5,6 +5,8 @@ import { AgentLoginData } from '../../types/agent';
 import { loginAgent } from '../../api/agents/login';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { storeAuthData } from '../../types/agent';
+
 import {
   User,
   Mail,
@@ -47,6 +49,8 @@ export default function LoginAgent() {
       const result = await loginAgent(formData);
 
       if (result.success) {
+        // Stocker le token et l'ID de l'agent
+        storeAuthData(result.token as string, result.agentId as string);
         router.push('/interfaceAgent/dashboard'); 
       } else {
         setError(result.error || "Une erreur s'est produite");

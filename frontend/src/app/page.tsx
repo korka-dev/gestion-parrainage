@@ -1,15 +1,15 @@
 "use client";
 
-import { UserGroupIcon, DocumentCheckIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { useState } from 'react'
+import { UserGroupIcon, DocumentCheckIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -18,11 +18,20 @@ export default function Home() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <span className="text-white text-xl font-bold">SenParrainage Électoral</span>
+              {/* Image à côté du texte */}
+              <img
+                src="/images/Logo.jpeg" // Remplacez par le chemin de votre image
+                alt="Logo"
+                className="h-10 w-10 mr-2"
+              />
+              <span className="text-white text-xl font-bold">SenParrainage </span>
             </div>
             <div className="hidden md:flex space-x-4">
               <Link href="/" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                 Accueil
+              </Link>
+              <Link href="/interfaceAgent/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Agents
               </Link>
               <Link href="/interfaceCandidat/login" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                 Candidats
@@ -46,6 +55,9 @@ export default function Home() {
             <div className="md:hidden">
               <Link href="/" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
                 Accueil
+              </Link>
+              <Link href="/interfaceAgent/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                Agents
               </Link>
               <Link href="/interfaceCandidat/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
                 Candidats
@@ -166,5 +178,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  )
+  );
 }

@@ -30,11 +30,16 @@ export async function loginAgent(data: AgentLoginData) {
       { expiresIn: "2h" }
     );
 
-    return { success: true, token, message: "Connexion réussie" };
+    // Retourner également l'ID de l'agent
+    return {
+      success: true,
+      token,
+      agentId: agent.id,
+      message: "Connexion réussie"
+    };
 
   } catch (error: any) {
     console.error("Erreur lors de la connexion :", error);
     return { success: false, error: "Erreur interne du serveur" };
   }
 }
-

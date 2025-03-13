@@ -84,7 +84,7 @@ export default function LoginForm() {
             Connexion
           </h2>
           <p className="text-green-50 text-center mt-2">
-            Accédez à votre espace parrainage
+            Accédez à votre espace candidat
           </p>
 
           {/* Élément décoratif */}
@@ -123,7 +123,7 @@ export default function LoginForm() {
                   value={formData.email}
                   onChange={handleChange}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 shadow-sm"
-                  placeholder="votreemail@exemple.com"
+                  placeholder=""
                   required
                 />
               </div>
@@ -181,8 +181,8 @@ export default function LoginForm() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Vous n&apos;avez pas de compte ?{' '}
-              <a href="/interfaceCandidat/register" className="text-green-500 hover:underline">
-                Créer un compte
+              <a href="" className="text-green-500 hover:underline">
+                Contacter le service
               </a>
             </p>
           </div>
