@@ -65,10 +65,9 @@ export default function CandidatesPage() {
     };
 
     const handleLogout = () => {
-        // Implémentez votre logique de déconnexion ici
-        // Par exemple:
+       
         localStorage.removeItem('authToken');
-        router.push('/interfaceCandidat/login');
+        router.push('/interfaceElecteur/login');
     };
 
     if (loading) {
