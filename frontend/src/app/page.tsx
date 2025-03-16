@@ -20,9 +20,10 @@
               <div className="flex items-center">
                 {/* Image à côté du texte */}
                 <img
-                  src="/images/Logo.jpeg" // Remplacez par le chemin de votre image
+                  src="/images/logo-sn.jpg" // Remplacez par le chemin de votre image
                   alt="Logo"
-                  className="h-10 w-10 mr-2 rounded-full"
+                  className="h-10 w-10 mr-2 rounded-full object-cover"
+                  style={{ border: 'none', backgroundColor: 'transparent' }}
                 />
                 <span className="text-white text-xl font-bold">SenParrainage Électoral</span>
               </div>
@@ -36,7 +37,7 @@
                 <Link href="/interfaceCandidat/login" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Candidats
                 </Link>
-                <Link href="/interfaceElecteur/login" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                <Link href="/interfaceElecteur/parrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Parrainage
                 </Link>
               </div>
@@ -62,7 +63,7 @@
                 <Link href="/interfaceCandidat/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Candidats
                 </Link>
-                <Link href="/interfaceElecteur/login" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                <Link href="/interfaceElecteur/parrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Parrainage
                 </Link>
               </div>
