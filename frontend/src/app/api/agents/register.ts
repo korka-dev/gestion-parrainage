@@ -19,15 +19,12 @@ export async function registerAgent(data: AgentData) {
       throw new Error("L'agent existe déjà avec ces informations");
     }
 
-    // If it's just a verification, stop here
     if (data.checkOnly) {
       return { success: true };
     }
 
-    // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    // Create a new agent
     const newAgent = await prisma.agent.create({
       data: {
         nom: data.lastName,
@@ -36,7 +33,13 @@ export async function registerAgent(data: AgentData) {
         password: hashedPassword,
         empreinteSHA: data.empreinteSHA,
         fichiers: {
-          create: data.fichiers || []
+          create: data.fichiers?.map((fichier) => ({
+            nom: fichier.nom,
+            chemin: fichier.chemin,
+            type: fichier.type,
+            taille: fichier.taille,
+            checksum: "default-checksum" 
+          })) || []
         },
         periodes: {
           create: data.periodes || []
@@ -46,7 +49,7 @@ export async function registerAgent(data: AgentData) {
 
     return { success: true, data: newAgent };
   } catch (error: any) {
-    console.error('Erreur lors de la création de l\'agent:', error);
+    console.error("Erreur lors de la création de l'agent:", error);
     return { success: false, error: error.message || "Erreur lors de l'enregistrement de l'agent" };
   }
 }
