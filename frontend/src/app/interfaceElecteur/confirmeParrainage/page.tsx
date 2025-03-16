@@ -156,11 +156,10 @@ export default function ParrainagePage() {
                             <Link href="/" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                                 Accueil
                             </Link>
-                            <Link href="/interfaceCandidat/login" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                                Candidats
-                            </Link>
-                            <Link href="/verification" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                                Vérification
+                        </div>
+                        <div className="hidden md:flex space-x-4">
+                            <Link href="/" className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors flex items-center">
+                                Déconnexion
                             </Link>
                         </div>
                         
@@ -185,20 +184,6 @@ export default function ParrainagePage() {
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Accueil
-                            </Link>
-                            <Link 
-                                href="/interfaceCandidat/login" 
-                                className="text-white hover:bg-green-500 block px-3 py-2 rounded-md text-base font-medium"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Candidats
-                            </Link>
-                            <Link 
-                                href="/verification" 
-                                className="text-white hover:bg-green-500 block px-3 py-2 rounded-md text-base font-medium"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Vérification
                             </Link>
                         </div>
                     )}

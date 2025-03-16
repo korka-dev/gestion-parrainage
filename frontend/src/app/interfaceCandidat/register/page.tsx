@@ -217,7 +217,7 @@ export default function RegisterCandidat() {
           <div className="relative px-8 py-8">
             <div className="mb-6 bg-green-50 text-green-700 px-4 py-3 rounded-xl border border-green-100 text-sm flex items-center">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-              Votre compte a été créé avec succès.
+              Le compte a été créé avec succès.
             </div>
             
             <button
@@ -243,11 +243,11 @@ export default function RegisterCandidat() {
         {/* En-tête */}
         <div className="relative bg-gradient-to-r from-green-600 to-emerald-500 px-8 py-8">
           <h2 className="text-3xl font-bold text-white text-center">
-            Inscription
+            Ajouter un candidat
           </h2>
-          <p className="text-green-50 text-center mt-2">
+          {/* <p className="text-green-50 text-center mt-2">
             {getStepTitle()}
-          </p>
+          </p> */}
           
           {/* Indicateur d'étape */}
           <div className="flex justify-center mt-4 space-x-2">
