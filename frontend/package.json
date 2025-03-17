@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "node vercel-build.js"
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
