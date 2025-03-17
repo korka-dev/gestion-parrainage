@@ -31,12 +31,6 @@
                 <Link href="/" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Accueil
                 </Link>
-                <Link href="/interfaceAgent/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                  Agents
-                </Link>
-                <Link href="/interfaceCandidat/login" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                  Candidats
-                </Link>
                 <Link href="/interfaceElecteur/parrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Parrainage
                 </Link>
@@ -56,12 +50,6 @@
               <div className="md:hidden">
                 <Link href="/" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Accueil
-                </Link>
-                <Link href="/interfaceAgent/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                  Agents
-                </Link>
-                <Link href="/interfaceCandidat/login" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
-                  Candidats
                 </Link>
                 <Link href="/interfaceElecteur/parrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Parrainage
