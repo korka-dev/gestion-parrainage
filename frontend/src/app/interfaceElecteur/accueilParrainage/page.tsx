@@ -126,7 +126,11 @@ export default function CandidatesPage() {
                                 Parrainage
                             </Link>
                             <button
-                                onClick={handleLogin}
+                                //onClick={handleLogin}
+                                onClick={() => {
+                                    setIsMenuOpen(false);
+                                    handleLogin();
+                                }}
                                 className="w-full text-left bg-white text-green-600 px-3 py-2 rounded-md hover:bg-green-50 transition-colors flex items-center border border-green-100"
                             >
                                 <LogIn size={18} className="mr-1" />
