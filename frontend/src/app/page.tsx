@@ -31,7 +31,7 @@
                 <Link href="/" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Accueil
                 </Link>
-                <Link href="/interfaceElecteur/parrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                <Link href="/interfaceElecteur/accueilParrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Parrainage
                 </Link>
               </div>
@@ -51,7 +51,7 @@
                 <Link href="/" className="block text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Accueil
                 </Link>
-                <Link href="/interfaceElecteur/parrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
+                <Link href="/interfaceElecteur/accueilParrainage" className="text-white hover:bg-green-500 px-3 py-2 rounded-md">
                   Parrainage
                 </Link>
               </div>

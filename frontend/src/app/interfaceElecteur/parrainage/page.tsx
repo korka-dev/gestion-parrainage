@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getAllCandidats } from '../../api/candidats/getAllCandidat';
 import { CandidatInfo } from '../../types/candidat';
 import Link from 'next/link';
-import { Plus, User, LogOut, Home, UserCheck, Search } from 'lucide-react';
+import { Plus, User, LogOut, UserCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 function useCandidats() {
@@ -61,6 +61,7 @@ export default function CandidatesPage() {
 
     const handleSponsorClick = (candidate: CandidatInfo) => {
         // Rediriger vers la page de parrainage avec les informations du candidat, y compris numeroCNI
+       //router.push("/interfaceElecteur/login")
         router.push(`/interfaceElecteur/confirmeParrainage?candidatId=${candidate.id}&nom=${candidate.nom}&prenom=${candidate.prenom}&numeroCNI=${candidate.numeroCNI}`);
     };
 
@@ -162,7 +163,7 @@ export default function CandidatesPage() {
                     </div>
                 )}
                 
-                <div className="mb-8">
+                <div className="flex flex-col items-center justify-center h-screen">
                     <h1 className="text-3xl font-bold text-gray-800">Candidats à l'élection</h1>
                     <p className="text-gray-600">Découvrez les candidats et leurs programmes électoraux</p>
                 </div>
